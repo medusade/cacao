@@ -45,6 +45,19 @@ nadir_DEFINES += \
 nadir_LIBS += \
 
 ########################################################################
+# talas
+TALAS_PKG = $${CACAO_PKG}/../talas
+TALAS_PRJ = $${TALAS_PKG}
+TALAS_SRC = $${TALAS_PKG}/src
+
+talas_INCLUDEPATH += \
+$${TALAS_SRC} \
+
+talas_DEFINES += \
+
+talas_LIBS += \
+
+########################################################################
 # lamna
 LAMNA_PKG = $${CACAO_PKG}/../lamna
 LAMNA_PRJ = $${LAMNA_PKG}
@@ -61,6 +74,7 @@ lamna_LIBS += \
 # cacao
 cacao_INCLUDEPATH += \
 $${CACAO_SRC} \
+$${talas_INCLUDEPATH} \
 $${nadir_INCLUDEPATH} \
 
 cacao_DEFINES += \

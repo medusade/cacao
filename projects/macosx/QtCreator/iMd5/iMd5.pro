@@ -13,63 +13,39 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: cacao.pri
+#   File: iMd5.pro
 #
 # Author: $author$
-#   Date: 6/9/2016
+#   Date: 8/29/2016
 ########################################################################
+include(../../../QtCreator/cacao.pri)
+include(../cacao.pri)
+include(../../../QtCreator/iMd5/iMd5.pri)
 
-CACAO_OS = macosx
+TARGET = iMd5
 
-########################################################################
-# NO Qt
-QT -= gui core
+INCLUDEPATH += \
+$${iMd5_INCLUDEPATH} \
 
-########################################################################
-# cocoa
-cocoa_LIBS += \
--framework AppKit \
--framework CoreFoundation \
--framework Foundation \
+DEFINES += \
+$${iMd5_DEFINES} \
 
 ########################################################################
-# nadir
-NADIR_BLD = ../../$${NADIR_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+OBJECTIVE_HEADERS += \
+$${iMd5_OBJECTIVE_HEADERS} \
 
-nadir_INCLUDEPATH += \
-
-nadir_DEFINES += \
-
-nadir_LIBS += \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
+OBJECTIVE_SOURCES += \
+$${iMd5_OBJECTIVE_SOURCES} \
 
 ########################################################################
-# lamna
-LAMNA_BLD = ../../$${LAMNA_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+HEADERS += \
+$${OBJECTIVE_HEADERS} \
+$${iMd5_HEADERS} \
 
-lamna_INCLUDEPATH += \
-
-lamna_DEFINES += \
-
-lamna_LIBS += \
--L$${LAMNA_LIB}/liblamna \
--llamna \
+SOURCES += \
+$${iMd5_SOURCES} \
 
 ########################################################################
-# cacao
-cacao_INCLUDEPATH += \
-
-cacao_DEFINES += \
-
-cacao_HEADERS += \
-
-cacao_SOURCES += \
-
-cacao_LIBS += \
-$${nadir_LIBS} \
--lpthread \
--ldl \
+LIBS += \
+$${iMd5_LIBS} \
 
