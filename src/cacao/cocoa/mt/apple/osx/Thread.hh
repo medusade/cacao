@@ -25,6 +25,7 @@
 
 namespace cacao {
 namespace cocoa {
+namespace mt {
 namespace apple {
 namespace osx {
 
@@ -32,6 +33,7 @@ typedef posix::Thread Thread;
 
 } // namespace osx 
 } // namespace apple 
+} // namespace mt
 } // namespace cocoa 
 } // namespace cacao 
 

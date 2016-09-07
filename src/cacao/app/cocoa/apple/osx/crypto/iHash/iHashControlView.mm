@@ -19,13 +19,15 @@
 ///   Date: 8/30/2016
 ///////////////////////////////////////////////////////////////////////
 #include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashControlView.hh"
+#include "cacao/app/cocoa/apple/osx/crypto/iHash/MainWindow.hh"
 
 ///////////////////////////////////////////////////////////////////////
 /// Implentation: iHashControlView
 ///////////////////////////////////////////////////////////////////////
 @implementation iHashControlView
 
-    - (iHashControlView*)initWithFrame:(NSRect)rect target:(NSObject*)target {
+    - (iHashControlView*)initWithFrame:(NSRect)rect target:(NSObject*)target
+                         mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer {
         const char* okLabel = XOS_GUI_COCOA_CRYPTO_HASH_IHASH_CONTROL_OK_LABEL;
         const char* cancelLabel = XOS_GUI_COCOA_CRYPTO_HASH_IHASH_CONTROL_CANCEL_LABEL;
         const char* quitLabel = XOS_GUI_COCOA_CRYPTO_HASH_IHASH_CONTROL_QUIT_LABEL;
@@ -53,6 +55,10 @@
         if (([super initWithFrame:rect])) {
             [self setAutoresizesSubviews:NO];
 
+            if ((_mainWindowPeer = mainWindowPeer)) {
+                hashSize = _mainWindowPeer->HashSize();
+            }
+
             if (((hashWidth = hashSize*charWidth*2)
                 > (hashWidthMax = hashSizeMax*charWidth*2))) {
                 hashWidth = hashWidthMax;
@@ -60,6 +66,7 @@
 
             frame = NSMakeRect(x+charWidth*labelLength + colSpacing, y, hashWidth, hashHeight);
             if ((_progress = [[Progress alloc] initWithFrame:frame])) {
+                [_progress hide];
                 [self addSubview:_progress];
                 if (width < (rowWidth += frame.size.width)) {
                     width = rowWidth + border;
@@ -187,10 +194,70 @@
         return nil;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setHash:(const String&)text{
+        if ((_hashEdit)) {
+            [_hashEdit setTextUTF8String:text];
+        }
+    }
+    - (void)getHash:(String&)text{
+        if ((_hashEdit)) {
+            [_hashEdit getTextUTF8String:text];
+        }
+    }
     - (BOOL)upperChecked {
         return [_upper checked];
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setFile:(const String&)text{
+        if ((_fileEdit)) {
+            [_fileEdit setTextUTF8String:text];
+        }
+    }
+    - (void)getFile:(String&)text{
+        if ((_fileEdit)) {
+            [_fileEdit getTextUTF8String:text];
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setText:(const String&)text{
+        if ((_textEdit)) {
+            [_textEdit setTextUTF8String:text];
+        }
+    }
+    - (void)getText:(String&)text{
+        if ((_textEdit)) {
+            [_textEdit getTextUTF8String:text];
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)showProgress:(size_t)maximum amount:(size_t)amount {
+        if ((_progress)) {
+            [_progress setMaxValue:maximum];
+            [_progress setDoubleValue:amount];
+            [_progress show];
+        }
+    }
+    - (void)updateProgress:(size_t)amount {
+        if ((_progress)) {
+            [_progress setDoubleValue:amount];
+        }
+    }
+    - (void)hideProgress {
+        if ((_progress)) {
+            [_progress hide];
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     - (void)drawRect:(NSRect)rect {
         NSRect bounds = [self bounds];
         [[self backgroundColor] set];

@@ -26,6 +26,8 @@
 namespace cacao {
 namespace cocoa {
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 template <class TImplements = ImplementBase>
 class _EXPORT_CLASS WaitedT: virtual public TImplements {
 public:
@@ -53,6 +55,38 @@ public:
     (mseconds_t waitMilliSeconds) { return WaitFailed; }
 };
 typedef WaitedT<> Waited;
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+template
+<class TWaited = Waited,
+ class TImplement = ImplementBase, class TExtend = Base>
+class _EXPORT_CLASS WaiterT: virtual public TImplement, public TExtend {
+public:
+    typedef TImplement Implements;
+    typedef TExtend Extends;
+    typedef TWaited Waited;
+    typedef typename Waited::WaitStatus WaitStatus;
+    static const WaitStatus WaitSuccess = Waited::WaitSuccess;
+    static const WaitStatus WaitFailed = Waited::WaitFailed;
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    WaiterT(Waited& waited, mseconds_t waitMilliSeconds) {
+        WaitStatus status = WaitFailed;
+        if (WaitSuccess != (status = waited.TimedWait(waitMilliSeconds))) {
+            throw (status);
+        }
+    }
+    WaiterT(Waited& waited) {
+        if (!(waited.Wait())) {
+            WaitStatus status = WaitFailed;
+            throw (status);
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+};
+typedef WaiterT<> Waiter;
 
 } // namespace cocoa
 } // namespace cacao 

@@ -24,29 +24,22 @@
 #include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainView.hh"
 #include "cacao/cocoa/apple/osx/MainWindow.hh"
 
-namespace cacao {
-namespace app {
-namespace cocoa {
-namespace apple {
-namespace osx {
-namespace iHash {
-
-class _EXPORT_CLASS MainWindow;
-
-} // namespace iHash
-} // namespace osx
-} // namespace apple
-} // namespace cocoa
-} // namespace app
-} // namespace cacao
-
 ///////////////////////////////////////////////////////////////////////
 /// Interface: iHashMainWindow
 ///////////////////////////////////////////////////////////////////////
 @interface iHashMainWindow: MainWindow {
     }
+    @property (assign) iHashMainWindowPeer* mainWindowPeer;
+
     - (iHashMainWindow*)initWithContentRect:(NSRect)contentRect
-                        application:(Application*)application;
+                        application:(Application*)application
+                        mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer;
+
+    - (void)upperClicked:(id)sender;
+    - (void)okClicked:(id)sender;
+    - (void)cancelClicked:(id)sender;
+    - (void)quitClicked:(id)sender;
+    - (void)updateFileHash:(id)sender;
 @end
 
 #endif // _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINWINDOW_HH

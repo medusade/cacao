@@ -13,26 +13,26 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: iHashMain.hh
+///   File: Sha512.mm
 ///
 /// Author: $author$
-///   Date: 8/30/2016
+///   Date: 9/6/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH
-#define _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH
+#include "cacao/cocoa/crypto/hash/Sha512.hh"
 
-#include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindow.hh"
-#include "cacao/cocoa/apple/osx/Main.hh"
+namespace cacao {
+namespace cocoa {
+namespace crypto {
+namespace hash {
 
 ///////////////////////////////////////////////////////////////////////
-/// Interface: iHashMain
 ///////////////////////////////////////////////////////////////////////
-@interface iHashMain: Main {
-    }
-    @property (assign) iHashMainWindowPeer* mainWindowPeer;
+Implement& Implement::TheDerived() {
+    static Sha512 sha512;
+    return sha512;
+}
 
-    - (iHashMain*)initWithApplication:(Application*)application;
-@end
-#endif // _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH 
-        
-
+} // namespace hash
+} // namespace crypto 
+} // namespace cocoa 
+} // namespace cacao 

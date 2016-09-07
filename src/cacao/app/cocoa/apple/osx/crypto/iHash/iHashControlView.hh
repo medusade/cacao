@@ -21,6 +21,7 @@
 #ifndef _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHCONTROLVIEW_HH
 #define _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHCONTROLVIEW_HH
 
+#include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindowPeer.hh"
 #include "cacao/cocoa/apple/osx/Edit.hh"
 #include "cacao/cocoa/apple/osx/Static.hh"
 #include "cacao/cocoa/apple/osx/Label.hh"
@@ -51,6 +52,8 @@
 ///////////////////////////////////////////////////////////////////////
 @interface iHashControlView: NSView {
     }
+    @property (assign) iHashMainWindowPeer* mainWindowPeer;
+
     @property (assign) Label* upperLabel;
     @property (assign) Label* hashLabel;
     @property (assign) Label* fileLabel;
@@ -67,8 +70,32 @@
     @property (assign) Check* upper;
     @property (assign) Progress* progress;
 
-    - (iHashControlView*)initWithFrame:(NSRect)rect target:(NSObject*)target;
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (iHashControlView*)initWithFrame:(NSRect)recttarget:(NSObject*)target
+                         mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer;
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setHash:(const String&)text;
+    - (void)getHash:(String&)text;
     - (BOOL)upperChecked;
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setFile:(const String&)text;
+    - (void)getFile:(String&)text;
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)setText:(const String&)text;
+    - (void)getText:(String&)text;
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)showProgress:(size_t)maximum amount:(size_t)amount;
+    - (void)updateProgress:(size_t)amount;
+    - (void)hideProgress;
 @end
 #endif // _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHCONTROLVIEW_HH
         

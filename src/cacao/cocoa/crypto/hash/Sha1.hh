@@ -13,57 +13,51 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Semaphore.hh
+///   File: Sha1.hh
 ///
 /// Author: $author$
-///   Date: 9/4/2016
+///   Date: 9/6/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _CACAO_COCOA_MT_SEMAPHORE_HH
-#define _CACAO_COCOA_MT_SEMAPHORE_HH
+#ifndef _CACAO_COCOA_CRYPTO_HASH_SHA1_HH
+#define _CACAO_COCOA_CRYPTO_HASH_SHA1_HH
 
-#include "cacao/cocoa/base/Created.hh"
-#include "cacao/cocoa/base/Acquired.hh"
-#include "cacao/cocoa/base/Waited.hh"
+#include "cacao/cocoa/crypto/hash/Base.hh"
+#include "talas/crypto/hash/openssl/sha1.cpp"
 
 namespace cacao {
 namespace cocoa {
-namespace mt {
+namespace crypto {
+namespace hash {
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS SemaphoreImplements
-: virtual public Waited, virtual public Acquired, virtual public Creator {
+class _EXPORT_CLASS Sha1: virtual public Implement, public Base {
 public:
-    typedef cocoa::Waited Waited;
-    typedef Waited::WaitStatus WaitStatus;
-};
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-template <class TImplements = SemaphoreImplements>
-class _EXPORT_CLASS SemaphoreT: virtual public TImplements {
-public:
-    typedef TImplements Implements;
-    typedef typename TImplements::Waited Waited;
-    typedef typename TImplements::WaitStatus WaitStatus;
+    typedef Implement Implements;
+    typedef Base Extends;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    using Implements::Create;
-    virtual bool Create(size_t initialCount) { return  false; }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool Wait() { return this->Acquire(); }
-    virtual WaitStatus TryWait() { return this->TryAcquire(); }
-    virtual WaitStatus TimedWait(mseconds_t waitMilliSeconds) {
-        return this->TimedAcquire(waitMilliSeconds); }
+    Sha1() {
+    }
+    virtual ~Sha1() {
+    }
 protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool InitiallyCreated() const { return true; }
+    virtual talas::crypto::hash::base_implements& Implemented() const {
+        return (talas::crypto::hash::base_implements&)m_sha1;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+protected:
+    talas::crypto::hash::openssl::sha1 m_sha1;
 };
-typedef SemaphoreT<> Semaphore;
 
-} // namespace mt 
+} // namespace hash
+} // namespace crypto 
 } // namespace cocoa 
 } // namespace cacao 
 
-#endif // _CACAO_COCOA_MT_SEMAPHORE_HH 
+#endif // _CACAO_COCOA_CRYPTO_HASH_SHA1_HH 
+        
+

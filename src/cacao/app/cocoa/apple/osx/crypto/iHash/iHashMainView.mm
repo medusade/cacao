@@ -19,6 +19,7 @@
 ///   Date: 8/30/2016
 ///////////////////////////////////////////////////////////////////////
 #include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainView.hh"
+#include "cacao/app/cocoa/apple/osx/crypto/iHash/MainWindow.hh"
 #include "cacao/cocoa/apple/osx/Logger.hh"
 
 ///////////////////////////////////////////////////////////////////////
@@ -28,12 +29,19 @@
 
     - (iHashMainView*)initWithFrame:(NSRect)rect
                       mainWindow:(MainWindow*)mainWindow
-                      application:(Application*)application {
+                      application:(Application*)application
+                      mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer {
 
         if (([super initWithFrame:rect application:application])) {
+            _mainWindowPeer = mainWindowPeer;
             [self setAutoresizesSubviews:NO];
 
-            if ((_control = [[iHashControlView alloc] initWithFrame:rect target:mainWindow])) {
+            if ((_control = [[iHashControlView alloc]
+                              initWithFrame:rect target:mainWindow
+                              mainWindowPeer:_mainWindowPeer])) {
+                if ((_mainWindowPeer)) {
+                    _mainWindowPeer->SetControlView(_control);
+                }
                 [self addSubview:_control];
                 rect = [_control frame];
                 [self setFrameSize:rect.size];

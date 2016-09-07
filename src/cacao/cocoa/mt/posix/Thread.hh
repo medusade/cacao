@@ -39,9 +39,10 @@
 
 namespace cacao {
 namespace cocoa {
+namespace mt {
 namespace posix {
 
-typedef CreatorT<cocoa::Thread> ThreadAttacherImplement;
+typedef CreatorT<mt::Thread> ThreadAttacherImplement;
 typedef Base ThreadAttachedExtend;
 typedef pthread_t* ThreadAttachedT;
 typedef AttacherT<ThreadAttachedT, int, 0, ThreadAttacherImplement> ThreadAttacher;
@@ -277,6 +278,7 @@ protected:
 typedef ThreadT<> Thread;
 
 } // namespace posix
+} // namespace mt
 } // namespace cocoa
 } // namespace cacao 
 

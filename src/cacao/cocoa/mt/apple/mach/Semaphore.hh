@@ -22,6 +22,7 @@
 #define _CACAO_COCOA_MT_APPLE_MACH_SEMAPHORE_HH
 
 #include "cacao/cocoa/mt/Semaphore.hh"
+#include "cacao/cocoa/base/Waited.hh"
 
 #include <mach/task.h>
 #include <mach/mach.h>
@@ -52,11 +53,12 @@ class _EXPORT_CLASS SemaphoreT: virtual public TImplements, public TExtends {
 public:
     typedef TImplements Implements;
     typedef TExtends Extends;
+    typedef typename TImplements::Waited Waited;
     typedef typename TImplements::WaitStatus WaitStatus;
-    static const WaitStatus WaitSuccess = WaitStatus::WaitSuccess;
-    static const WaitStatus WaitFailed = WaitStatus::WaitFailed;
-    static const WaitStatus WaitBusy = WaitStatus::WaitBusy;
-    static const WaitStatus WaitInterrupted = WaitStatus::WaitInterrupted;
+    static const WaitStatus WaitSuccess = Waited::WaitSuccess;
+    static const WaitStatus WaitFailed = Waited::WaitFailed;
+    static const WaitStatus WaitBusy = Waited::WaitBusy;
+    static const WaitStatus WaitInterrupted = Waited::WaitInterrupted;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     SemaphoreT(semaphore_t* attachedTo, bool isCreated)

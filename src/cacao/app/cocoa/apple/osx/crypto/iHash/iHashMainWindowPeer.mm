@@ -13,26 +13,9 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: iHashMain.hh
+///   File: iHashMainWindowPeer.mm
 ///
 /// Author: $author$
-///   Date: 8/30/2016
+///   Date: 9/6/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH
-#define _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH
-
-#include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindow.hh"
-#include "cacao/cocoa/apple/osx/Main.hh"
-
-///////////////////////////////////////////////////////////////////////
-/// Interface: iHashMain
-///////////////////////////////////////////////////////////////////////
-@interface iHashMain: Main {
-    }
-    @property (assign) iHashMainWindowPeer* mainWindowPeer;
-
-    - (iHashMain*)initWithApplication:(Application*)application;
-@end
-#endif // _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAIN_HH 
-        
-
+#include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindowPeer.hh"

@@ -29,11 +29,13 @@
 ///////////////////////////////////////////////////////////////////////
 @interface iHashMainView: MainView {
     }
+    @property (assign) iHashMainWindowPeer* mainWindowPeer;
     @property (assign) iHashControlView* control;
 
     - (iHashMainView*)initWithFrame:(NSRect)rect
                       mainWindow:(MainWindow*)mainWindow
-                      application:(Application*)application;
+                      application:(Application*)application
+                      mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer;
     - (BOOL)upperChecked;
 @end
 #endif // _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_HH 

@@ -31,7 +31,7 @@
 
         if (([super initWithApplication:application])) {
 
-            if ((_mainWindow = new cacao::app::cocoa::apple::osx::iHash::MainWindow())) {
+            if ((_mainWindowPeer = new iHashMainWindowPeer())) {
                 return self;
             }
         }
@@ -43,11 +43,11 @@
         Application* application = [super application];
         iHashMainWindow* window = nil;
 
-        LOG_DEBUG("[[iHashMainWindow alloc] initWithContentRect:contentRect application:application]...");
-        if ((window = [[iHashMainWindow alloc] initWithContentRect:contentRect application:application])) {
+        LOG_DEBUG("[[iHashMainWindow alloc] initWithContentRect:contentRect application:application mainWindowPeer:_mainWindowPeer]...");
+        if ((window = [[iHashMainWindow alloc] initWithContentRect:contentRect application:application mainWindowPeer:_mainWindowPeer])) {
             return window;
         } else {
-            LOG_ERROR("...failed on [[iHashMainWindow alloc] initWithContentRect:contentRect application:application]");
+            LOG_ERROR("...failed on [[iHashMainWindow alloc] initWithContentRect:contentRect application:application mainWindowPeer:_mainWindowPeer]");
         }
         return nil;
     }

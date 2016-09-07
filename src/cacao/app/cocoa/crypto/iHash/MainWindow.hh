@@ -24,7 +24,7 @@
 #include "cacao/cocoa/crypto/hash/Base.hh"
 #include <sys/stat.h>
 
-#define XOS_APP_GUI_CRYPTO_HASH_MAINWINDOW_FILE_BUFFER_SIZE (1024*64)
+#define CACAO_APP_COCOA_CRYPTO_IHASH_MAINWINDOW_FILE_BUFFER_SIZE (1024*64)
 
 namespace cacao {
 namespace app {
@@ -43,15 +43,21 @@ public:
     ///////////////////////////////////////////////////////////////////////
     MainWindowT()
     : m_hash(cacao::cocoa::crypto::hash::Implement::TheDerived()),
-      m_hashName(m_hash.name()),
-      m_hexA('A'),
       m_file(0),
       m_fileSize(0),
       m_fileAmount(0),
       m_fileBufferLength(0),
-      m_fileBufferSize(XOS_APP_GUI_CRYPTO_HASH_MAINWINDOW_FILE_BUFFER_SIZE) {
+      m_fileBufferSize(CACAO_APP_COCOA_CRYPTO_IHASH_MAINWINDOW_FILE_BUFFER_SIZE) {
     }
     virtual ~MainWindowT() {
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual size_t HashSize() const {
+        return m_hash.hash_size();
+    }
+    virtual const char* HashName() const {
+        return m_hash.name();
     }
 protected:
     ///////////////////////////////////////////////////////////////////////
@@ -61,6 +67,7 @@ protected:
     virtual bool PostUpdateFileHashEvent() { return true; }
     virtual bool ShowHash(const String& hashX) { return true; }
     virtual bool ClearHash() { return true; }
+    virtual bool HashIsUpperCase() { return false; }
     virtual bool ShowProgress(size_t maximum, size_t amount) { return true; }
     virtual bool UpdateProgress(size_t amount) { return true; }
     virtual bool HideProgress() { return true; }
@@ -139,9 +146,13 @@ protected:
         return false;
     }
     virtual bool HashBlank() {
+        LOG_DEBUG("CloseFile()...");
         CloseFile();
+        LOG_DEBUG("ClearHash...");
         if ((ClearHash())) {
+            LOG_DEBUG("BeginHash...");
             if ((BeginHash())) {
+                LOG_DEBUG("EndHash...");
                 EndHash();
                 return true;
             }
@@ -209,7 +220,8 @@ protected:
         size_t hashLength;
         if ((hashChars = (m_hashArray.elements()))
             && ((hashLength = m_hashArray.length()))) {
-            hashXString.appendx(hashChars, hashLength, m_hexA);
+            hashXString.appendx(hashChars, hashLength, HashIsUpperCase());
+            LOG_DEBUG("ShowHash(hashXString = \"" << hashXString << "\")...");
             ShowHash(hashXString);
             return true;
         }
@@ -217,27 +229,15 @@ protected:
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool SetIsUpperX(bool to = true) {
-        m_hexA = (to)?('A'):('a');
-        UpdateHash();
-        return to;
-    }
-    virtual bool GetIsUpperX() const {
-        return ('A' == m_hexA);
-    }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
 protected:
     cacao::cocoa::crypto::hash::Implement &m_hash;
-    const char* m_hashName;
-    char m_hexA;
     xos::base::char_array m_hashArray;
     FILE* m_file;
     size_t m_fileSize;
     size_t m_fileAmount;
     size_t m_fileBufferLength;
     size_t m_fileBufferSize;
-    uint8_t m_fileBuffer[XOS_APP_GUI_CRYPTO_HASH_MAINWINDOW_FILE_BUFFER_SIZE];
+    uint8_t m_fileBuffer[CACAO_APP_COCOA_CRYPTO_IHASH_MAINWINDOW_FILE_BUFFER_SIZE];
 };
 typedef MainWindowT<> MainWindow;
 

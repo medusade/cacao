@@ -22,10 +22,12 @@
 
 namespace cacao {
 namespace cocoa {
+namespace mt {
 namespace apple {
 namespace osx {
 
 } // namespace osx 
 } // namespace apple 
+} // namespace mt
 } // namespace cocoa 
 } // namespace cacao 
