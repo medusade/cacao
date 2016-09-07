@@ -13,40 +13,40 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: iMd5.pro
+#   File: iSha1.pro
 #
 # Author: $author$
-#   Date: 8/29/2016
+#   Date: 9/6/2016
 ########################################################################
 include(../../../QtCreator/cacao.pri)
 include(../cacao.pri)
 include(../../../QtCreator/iHash/iHash.pri)
-include(../../../QtCreator/iMd5/iMd5.pri)
+include(../../../QtCreator/iSha1/iSha1.pri)
 
-TARGET = iMd5
+TARGET = iSha1
 
 INCLUDEPATH += \
-$${iMd5_INCLUDEPATH} \
+$${iSha1_INCLUDEPATH} \
 
 DEFINES += \
-$${iMd5_DEFINES} \
+$${iSha1_DEFINES} \
 
 ########################################################################
 OBJECTIVE_HEADERS += \
-$${iMd5_OBJECTIVE_HEADERS} \
+$${iSha1_OBJECTIVE_HEADERS} \
 
 OBJECTIVE_SOURCES += \
-$${iMd5_OBJECTIVE_SOURCES} \
+$${iSha1_OBJECTIVE_SOURCES} \
 
 ########################################################################
 HEADERS += \
 $${OBJECTIVE_HEADERS} \
-$${iMd5_HEADERS} \
+$${iSha1_HEADERS} \
 
 SOURCES += \
-$${iMd5_SOURCES} \
+$${iSha1_SOURCES} \
 
 ########################################################################
 LIBS += \
-$${iMd5_LIBS} \
+$${iSha1_LIBS} \
 

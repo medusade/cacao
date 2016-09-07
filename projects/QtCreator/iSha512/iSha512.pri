@@ -13,40 +13,33 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: iMd5.pro
+#   File: iSha512.pri
 #
 # Author: $author$
-#   Date: 8/29/2016
+#   Date: 9/8/2016
 ########################################################################
-include(../../../QtCreator/cacao.pri)
-include(../cacao.pri)
-include(../../../QtCreator/iHash/iHash.pri)
-include(../../../QtCreator/iMd5/iMd5.pri)
+iSha512_INCLUDEPATH += \
+$${iHash_INCLUDEPATH} \
 
-TARGET = iMd5
-
-INCLUDEPATH += \
-$${iMd5_INCLUDEPATH} \
-
-DEFINES += \
-$${iMd5_DEFINES} \
+iSha512_DEFINES += \
+$${iHash_DEFINES} \
 
 ########################################################################
-OBJECTIVE_HEADERS += \
-$${iMd5_OBJECTIVE_HEADERS} \
+iSha512_OBJECTIVE_HEADERS += \
+$${iHash_OBJECTIVE_HEADERS} \
+$${CACAO_SRC}/cacao/cocoa/crypto/hash/Sha512.hh \
 
-OBJECTIVE_SOURCES += \
-$${iMd5_OBJECTIVE_SOURCES} \
-
-########################################################################
-HEADERS += \
-$${OBJECTIVE_HEADERS} \
-$${iMd5_HEADERS} \
-
-SOURCES += \
-$${iMd5_SOURCES} \
+iSha512_OBJECTIVE_SOURCES += \
+$${iHash_OBJECTIVE_SOURCES} \
+$${CACAO_SRC}/cacao/cocoa/crypto/hash/Sha512.mm \
 
 ########################################################################
-LIBS += \
-$${iMd5_LIBS} \
+iSha512_HEADERS += \
+$${iHash_HEADERS} \
 
+iSha512_SOURCES += \
+$${iHash_SOURCES} \
+
+########################################################################
+iSha512_LIBS += \
+$${iHash_LIBS} \

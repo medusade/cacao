@@ -19,117 +19,27 @@
 #   Date: 8/29/2016
 ########################################################################
 iMd5_INCLUDEPATH += \
-$${cacao_INCLUDEPATH} \
+$${iHash_INCLUDEPATH} \
 
 iMd5_DEFINES += \
-$${cacao_DEFINES} \
+$${iHash_DEFINES} \
 
 ########################################################################
 iMd5_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/cocoa/base/Run.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Joined.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Acquired.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Waited.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Locked.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Opened.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Created.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Attached.hh \
-$${CACAO_SRC}/cacao/cocoa/base/Base.hh \
-
-iMd5_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/cocoa/base/Run.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Joined.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Acquired.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Waited.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Locked.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Opened.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Created.mm \
-$${CACAO_SRC}/cacao/cocoa/base/Attached.mm \
-
-_iMd5_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/cocoa/base/Base.mm \
-
-########################################################################
-iMd5_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/osx/Thread.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/posix/Thread.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/Thread.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/osx/Semaphore.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/mach/Semaphore.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/Semaphore.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/osx/Mutex.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/posix/Mutex.hh \
-$${CACAO_SRC}/cacao/cocoa/mt/Mutex.hh \
-
-iMd5_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/osx/Thread.mm \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/mach/Semaphore.mm \
-$${CACAO_SRC}/cacao/cocoa/mt/apple/osx/Mutex.mm \
-
-########################################################################
-iMd5_OBJECTIVE_HEADERS += \
+$${iHash_OBJECTIVE_HEADERS} \
 $${CACAO_SRC}/cacao/cocoa/crypto/hash/Md5.hh \
-$${CACAO_SRC}/cacao/cocoa/crypto/hash/Base.hh \
 
 iMd5_OBJECTIVE_SOURCES += \
+$${iHash_OBJECTIVE_SOURCES} \
 $${CACAO_SRC}/cacao/cocoa/crypto/hash/Md5.mm \
-$${CACAO_SRC}/cacao/cocoa/crypto/hash/Base.mm \
 
 ########################################################################
-iMd5_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Main.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainWindow.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainView.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainMenu.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Application.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Static.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Edit.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Label.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/TextField.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Check.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Button.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Progress.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Logger.hh \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Cocoa.hh \
+iMd5_HEADERS += \
+$${iHash_HEADERS} \
 
-iMd5_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Main.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainWindow.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainView.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/MainMenu.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Application.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Static.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Edit.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Label.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/TextField.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Check.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Button.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Progress.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Logger.mm \
-$${CACAO_SRC}/cacao/cocoa/apple/osx/Cocoa.mm \
-
-########################################################################
-iMd5_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/app/cocoa/crypto/iHash/MainWindow.hh \
-
-iMd5_OBJECTIVE_SOURCES += \
-
-########################################################################
-iMd5_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/MainWindow.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMain.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindow.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainView.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashControlView.hh \
-
-iMd5_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMain.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindow.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainView.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashControlView.mm \
+iMd5_SOURCES += \
+$${iHash_SOURCES} \
 
 ########################################################################
 iMd5_LIBS += \
-$${cocoa_LIBS} \
-$${cacao_LIBS} \
-
+$${iHash_LIBS} \

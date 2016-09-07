@@ -13,40 +13,39 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: iMd5.pro
+#   File: iLamna.pro
 #
 # Author: $author$
-#   Date: 8/29/2016
+#   Date: 9/7/2016
 ########################################################################
 include(../../../QtCreator/cacao.pri)
 include(../cacao.pri)
-include(../../../QtCreator/iHash/iHash.pri)
-include(../../../QtCreator/iMd5/iMd5.pri)
+include(../../../QtCreator/iLamna/iLamna.pri)
 
-TARGET = iMd5
+TARGET = iLamna
 
 INCLUDEPATH += \
-$${iMd5_INCLUDEPATH} \
+$${iLamna_INCLUDEPATH} \
 
 DEFINES += \
-$${iMd5_DEFINES} \
+$${iLamna_DEFINES} \
 
 ########################################################################
 OBJECTIVE_HEADERS += \
-$${iMd5_OBJECTIVE_HEADERS} \
+$${iLamna_OBJECTIVE_HEADERS} \
 
 OBJECTIVE_SOURCES += \
-$${iMd5_OBJECTIVE_SOURCES} \
+$${iLamna_OBJECTIVE_SOURCES} \
 
 ########################################################################
 HEADERS += \
 $${OBJECTIVE_HEADERS} \
-$${iMd5_HEADERS} \
+$${iLamna_HEADERS} \
 
 SOURCES += \
-$${iMd5_SOURCES} \
+$${iLamna_SOURCES} \
 
 ########################################################################
 LIBS += \
-$${iMd5_LIBS} \
+$${iLamna_LIBS} \
 
