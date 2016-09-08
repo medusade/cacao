@@ -20,9 +20,11 @@
 ########################################################################
 iHash_INCLUDEPATH += \
 $${cacao_INCLUDEPATH} \
+$${lamna_INCLUDEPATH} \
 
 iHash_DEFINES += \
 $${cacao_DEFINES} \
+$${lamna_DEFINES} \
 
 ########################################################################
 iHash_OBJECTIVE_HEADERS += \

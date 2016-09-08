@@ -27,6 +27,13 @@ $${cacao_DEFINES} \
 $${lamna_DEFINES} \
 
 ########################################################################
+iLamna_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image.hpp \
+
+iLamna_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image.cpp \
+
+########################################################################
 iLamna_OBJECTIVE_HEADERS += \
 $${CACAO_SRC}/cacao/cocoa/base/Run.hh \
 $${CACAO_SRC}/cacao/cocoa/base/Joined.hh \
@@ -114,20 +121,19 @@ $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/context.mm \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/pixel.mm \
 
 ########################################################################
+iLamna_OBJECTIVE_HEADERS += \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMain.hh \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainWindow.hh \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainView.hh \
+
+iLamna_OBJECTIVE_SOURCES += \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMain.mm \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainWindow.mm \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainView.mm \
+
 _iLamna_OBJECTIVE_HEADERS += \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/MainWindow.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMain.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainWindow.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainView.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaControlView.hh \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainWindowPeer.hh \
 
 _iLamna_OBJECTIVE_SOURCES += \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMain.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainWindow.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainView.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaControlView.mm \
-$${CACAO_SRC}/cacao/app/cocoa/apple/osx/graphics/iLamna/iLamnaMainWindowPeer.mm \
 
 ########################################################################
 iLamna_LIBS += \
