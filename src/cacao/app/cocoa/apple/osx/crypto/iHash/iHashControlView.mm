@@ -57,6 +57,7 @@
 
             if ((_mainWindowPeer = mainWindowPeer)) {
                 hashSize = _mainWindowPeer->HashSize();
+                hashLabel = _mainWindowPeer->HashName();
             }
 
             if (((hashWidth = hashSize*charWidth*2)

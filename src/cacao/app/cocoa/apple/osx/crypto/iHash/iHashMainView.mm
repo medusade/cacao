@@ -32,6 +32,21 @@
                       application:(Application*)application
                       mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer {
 
+        _cornerRadius = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_CORNER_RADIUS;
+        _colorRadius = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_COLOR_RADIUS;
+
+        _fgR = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_R;
+        _fgG = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_G;
+        _fgB = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_B;
+        _fgPixel = new iLamnaPixel(_fgR, _fgG, _fgB);
+        _fgColor = (NSColor*)(*_fgPixel);
+
+        _bgR = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_R;
+        _bgG = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_G;
+        _bgB = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_B;
+        _bgPixel = new iLamnaPixel(_bgR, _bgG, _bgB);
+        _bgColor = (NSColor*)(*_bgPixel);
+
         if (([super initWithFrame:rect application:application])) {
             _mainWindowPeer = mainWindowPeer;
             [self setAutoresizesSubviews:NO];
@@ -39,16 +54,77 @@
             if ((_control = [[iHashControlView alloc]
                               initWithFrame:rect target:mainWindow
                               mainWindowPeer:_mainWindowPeer])) {
+
                 if ((_mainWindowPeer)) {
                     _mainWindowPeer->SetControlView(_control);
                 }
                 [self addSubview:_control];
                 rect = [_control frame];
+                rect.size.width += (_cornerRadius*2)-2;
+                rect.size.height += (_cornerRadius*2)-2;
                 [self setFrameSize:rect.size];
+                rect.origin.x = _cornerRadius-1;
+                rect.origin.y = _cornerRadius-1;
+                [_control setFrameOrigin:rect.origin];
+
+                if ((_minButton = [NSWindow
+                     standardWindowButton:NSWindowMiniaturizeButton
+                     forStyleMask:NSBorderlessWindowMask])) {
+                    NSRect minRect = [_minButton bounds];
+                    NSTrackingAreaOptions minTrackingOptions = NSTrackingMouseEnteredAndExited
+                                                               | NSTrackingActiveAlways;
+                    NSTrackingArea* minTrackingArea = nil;
+                    rect = [self frame];
+                    rect.origin.x = _cornerRadius;
+                    rect.origin.y = rect.size.height - ((_cornerRadius - minRect.size.height)/2 + minRect.size.height);
+                    [_minButton setFrameOrigin:rect.origin];
+                    [self addSubview:_minButton];
+                    if ((minTrackingArea = [[NSTrackingArea alloc]
+                         initWithRect:minRect options:minTrackingOptions
+                         owner:self userInfo:nil])) {
+                        [_minButton addTrackingArea:minTrackingArea];
+                    }
+                }
                 return self;
             }
         }
         return nil;
+    }
+
+    - (void)windowDidBecomeKey:(NSNotification*)notification {
+        [_minButton setState:NSOnState];
+    }
+    - (void)windowDidResignKey:(NSNotification*)notification {
+        [_minButton setState:NSOffState];
+    }
+    - (void)mouseEntered:(NSEvent *)theEvent{
+        [_minButton highlight:YES];
+    }
+    - (void)mouseExited:(NSEvent *)theEvent{
+        [_minButton highlight:NO];
+    }
+
+    - (void)drawRect:(NSRect)rect {
+        NSRect bounds = [self bounds];
+        int w = bounds.size.width, h = bounds.size.height;
+        [[NSColor clearColor] set];
+        NSRectFill(bounds);
+        if ((_cornerRadius*2 < w) && (_cornerRadius*2 < h)) {
+            iLamnaContext context(self);
+            iLamnaImage image(context);
+            iLamnaColor fgColor(image, _fgR, _fgG, _fgB, _colorRadius, _colorRadius);
+            iLamnaColor bgColor(image, _bgR, _bgG, _bgB, _colorRadius, _colorRadius);
+            image.SelectImage(&bgColor);
+            image.FillRoundedRectangle
+            (_cornerRadius,_cornerRadius,
+             w-_cornerRadius*2-_colorRadius+1,
+             h-_cornerRadius*2-_colorRadius+1, _cornerRadius);
+            image.SelectImage(&fgColor);
+            image.DrawRoundedRectangle
+            (_cornerRadius,_cornerRadius,
+             w-_cornerRadius*2-_colorRadius+1,
+             h-_cornerRadius*2-_colorRadius+1, _cornerRadius);
+        }
     }
 
     - (BOOL)upperChecked {
@@ -56,7 +132,7 @@
     }
 
     - (NSColor*)backgroundColor {
-        return [NSColor grayColor];
+        return _bgColor;
     }
 @end
         

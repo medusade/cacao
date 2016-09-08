@@ -114,7 +114,7 @@ public:
     (tOffset x, tOffset y, tSize width, tSize height, const tPixelInterface& color) {
         eError error = e_ERROR_NONE;
         NSRect rect = [view_ bounds];
-        y = ((int)rect.size.height)-y;
+        y = ((int)rect.size.height)-y-height;
         [((NSColor*)color) set];
         NSRectFill(NSMakeRect(x,y, width,height));
         return error;

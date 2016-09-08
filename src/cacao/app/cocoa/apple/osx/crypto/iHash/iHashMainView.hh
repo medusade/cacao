@@ -22,7 +22,24 @@
 #define _CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_HH
 
 #include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashControlView.hh"
+#include "cacao/cocoa/lamna/graphic/surface/apple/osx/color.hh"
 #include "cacao/cocoa/apple/osx/MainWindow.hh"
+
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_CORNER_RADIUS 26
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_COLOR_RADIUS 2
+
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_R 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_G 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_B 0x88
+
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_R 0xFF
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_G 0xFF
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_B 0xDD
+
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::pixel iLamnaPixel;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::context iLamnaContext;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::image iLamnaImage;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
 
 ///////////////////////////////////////////////////////////////////////
 /// Interface: iHashMainView
@@ -31,6 +48,22 @@
     }
     @property (assign) iHashMainWindowPeer* mainWindowPeer;
     @property (assign) iHashControlView* control;
+    @property (assign) NSView* minButton;
+
+    @property (assign) int cornerRadius;
+    @property (assign) int colorRadius;
+
+    @property (assign) int fgR;
+    @property (assign) int fgG;
+    @property (assign) int fgB;
+    @property (assign) iLamnaPixel* fgPixel;
+    @property (assign) NSColor* fgColor;
+
+    @property (assign) int bgR;
+    @property (assign) int bgG;
+    @property (assign) int bgB;
+    @property (assign) iLamnaPixel* bgPixel;
+    @property (assign) NSColor* bgColor;
 
     - (iHashMainView*)initWithFrame:(NSRect)rect
                       mainWindow:(MainWindow*)mainWindow

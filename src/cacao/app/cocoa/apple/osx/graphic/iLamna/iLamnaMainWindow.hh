@@ -13,40 +13,27 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: MainWindow.hh
+///   File: iLamnaMainWindow.hh
 ///
 /// Author: $author$
-///   Date: 8/29/2016
+///   Date: 9/7/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _CACAO_COCOA_APPLE_OSX_MAINWINDOW_HH
-#define _CACAO_COCOA_APPLE_OSX_MAINWINDOW_HH
+#ifndef _CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_ILAMNAMAINWINDOW_HH
+#define _CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_ILAMNAMAINWINDOW_HH
 
-#include "cacao/cocoa/apple/osx/Application.hh"
-#include "cacao/cocoa/apple/osx/MainView.hh"
+#include "cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainView.hh"
+#include "cacao/cocoa/apple/osx/MainWindow.hh"
 
 ///////////////////////////////////////////////////////////////////////
-/// Interface: MainWindow
+/// Interface: iLamnaMainWindow
 ///////////////////////////////////////////////////////////////////////
-@interface MainWindow: NSWindow <NSWindowDelegate> {
+@interface iLamnaMainWindow: MainWindow {
     }
-    @property (assign) Application* application;
-    @property (assign) MainView* view;
+    @property (assign) iLamnaMainView* mainView;
 
-    - (MainWindow*)initWithContentRect:(NSRect)contentRect application:(Application*)application;
-    - (MainView*)createViewWithContentRect:(NSRect)contentRect;
-    - (NSUInteger)windowStyle;
-    - (NSBackingStoreType)bufferingType;
-    - (BOOL)deferCreation;
+    - (iLamnaMainWindow*)initWithContentRect:(NSRect)contentRect
+                         application:(Application*)application;
 @end
+#endif // _CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_ILAMNAMAINWINDOW_HH 
+        
 
-namespace cacao {
-namespace cocoa {
-namespace apple {
-namespace osx {
-
-} // namespace osx 
-} // namespace apple 
-} // namespace cocoa 
-} // namespace cacao 
-
-#endif // _CACAO_COCOA_APPLE_OSX_MAINWINDOW_HH

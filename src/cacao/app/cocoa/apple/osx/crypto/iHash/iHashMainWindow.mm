@@ -40,6 +40,11 @@
                 LOG_DEBUG("_mainWindowPeer->Init(self)...");
                 _mainWindowPeer->Init(self);
             }
+            [self setOpaque:NO];
+            [self setAlphaValue:1];
+            [self setBackgroundColor:[NSColor clearColor]];
+            [self setHasShadow:YES];
+            [self setMovableByWindowBackground:YES];
             return self;
         }
         return nil;
@@ -105,68 +110,82 @@
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     - (NSUInteger)windowStyle {
-        return NSTitledWindowMask | NSClosableWindowMask
+        return NSBorderlessWindowMask
+               | NSClosableWindowMask
                | NSMiniaturizableWindowMask;
     }
+    - (BOOL)canBecomeMainWindow {
+        return YES;
+    }
+    - (BOOL)canBecomeKeyWindow {
+        return YES;
+    }
+    - (void)windowDidBecomeKey:(NSNotification*)notification {
+        [[self view] windowDidBecomeKey:notification];
+    }
+    - (void)windowDidResignKey:(NSNotification*)notification {
+        [[self view] windowDidResignKey:notification];
+    }
+
     - (void)setContentView:(NSView*)contentView {
         NSRect contentRect = [contentView frame];
         [self setFrame:[self frameRectForContentRect:contentRect] display:YES];
         [super setContentView:contentView];
     }
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
-    NSPasteboard* pboard = [sender draggingPasteboard];
-    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
+        NSPasteboard* pboard = [sender draggingPasteboard];
+        NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
 
-    if ([[pboard types] containsObject:NSFilenamesPboardType]) {
-        if (sourceDragMask & NSDragOperationLink) {
-            return NSDragOperationCopy;
-        } else if (sourceDragMask & NSDragOperationCopy) {
-            return NSDragOperationCopy;
+        if ([[pboard types] containsObject:NSFilenamesPboardType]) {
+            if (sourceDragMask & NSDragOperationLink) {
+                return NSDragOperationCopy;
+            } else if (sourceDragMask & NSDragOperationCopy) {
+                return NSDragOperationCopy;
+            }
         }
+        return NSDragOperationNone;
     }
-    return NSDragOperationNone;
-}
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
-    NSPasteboard *pboard = [sender draggingPasteboard];
-    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
+    - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
+        NSPasteboard *pboard = [sender draggingPasteboard];
+        NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
 
-    LOG_DEBUG("...dropped");
-    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
-        NSArray* files = nil;
+        LOG_DEBUG("...dropped");
+        if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
+            NSArray* files = nil;
 
-        if ((files = [pboard propertyListForType:NSFilenamesPboardType])) {
-            NSString* fileName = nil;
+            if ((files = [pboard propertyListForType:NSFilenamesPboardType])) {
+                NSString* fileName = nil;
 
-            LOG_DEBUG("...dropped files");
-            if ((fileName = [files objectAtIndex:0])) {
-                const char* chars = 0;
+                LOG_DEBUG("...dropped files");
+                if ((fileName = [files objectAtIndex:0])) {
+                    const char* chars = 0;
 
-                if ((chars = [fileName UTF8String])) {
-                    iHashMainView* view = nil;
+                    if ((chars = [fileName UTF8String])) {
+                        iHashMainView* view = nil;
 
-                    LOG_DEBUG("...dropped file \"" << chars << "\"");
-                    if ((view = [self view])) {
-                        iHashControlView* control = nil;
+                        LOG_DEBUG("...dropped file \"" << chars << "\"");
+                        if ((view = [self view])) {
+                            iHashControlView* control = nil;
 
-                        if ((control = [view control])) {
-                            String fileString(chars);
+                            if ((control = [view control])) {
+                                String fileString(chars);
 
-                            [control setFile:fileString];
-                            if ((_mainWindowPeer)) {
-                                _mainWindowPeer->Hash();
+                                [control setFile:fileString];
+                                if ((_mainWindowPeer)) {
+                                    _mainWindowPeer->Hash();
+                                }
+                                return YES;
                             }
-                            return YES;
                         }
                     }
                 }
             }
         }
+        return NO;
     }
-    return NO;
-}
 @end
         
 

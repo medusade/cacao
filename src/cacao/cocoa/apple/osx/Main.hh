@@ -43,6 +43,10 @@
     @property (assign) MainMenu* menu;
 
     - (id<Main>)initWithApplication:(Application*)application;
+    - (NSRect)windowContentRect;
+    - (NSString*)windowTitle;
+    - (NSString*)menuQuitTitle;
+    - (NSString*)menuQuitKeyEquivalent;
 @end
 
 ///////////////////////////////////////////////////////////////////////
