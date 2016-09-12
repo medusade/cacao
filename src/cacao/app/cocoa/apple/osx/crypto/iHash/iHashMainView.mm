@@ -27,6 +27,8 @@
 ///////////////////////////////////////////////////////////////////////
 @implementation iHashMainView
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     - (iHashMainView*)initWithFrame:(NSRect)rect
                       mainWindow:(MainWindow*)mainWindow
                       application:(Application*)application
@@ -91,19 +93,33 @@
         return nil;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)windowDidBecomeMain:(NSNotification*)notification {
+    }
+    - (void)windowDidResignMain:(NSNotification*)notification {
+    }
     - (void)windowDidBecomeKey:(NSNotification*)notification {
+        LOG_DEBUG("[_minButton setState:NSOnState]...");
         [_minButton setState:NSOnState];
+        [_minButton setNeedsDisplay:YES];
     }
     - (void)windowDidResignKey:(NSNotification*)notification {
+        LOG_DEBUG("[_minButton setState:NSOffState]...");
         [_minButton setState:NSOffState];
+        [_minButton setNeedsDisplay:YES];
     }
     - (void)mouseEntered:(NSEvent *)theEvent{
+        LOG_DEBUG("[_minButton highlight:YES]...");
         [_minButton highlight:YES];
     }
     - (void)mouseExited:(NSEvent *)theEvent{
+        LOG_DEBUG("[_minButton highlight:NO]...");
         [_minButton highlight:NO];
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     - (void)drawRect:(NSRect)rect {
         NSRect bounds = [self bounds];
         int w = bounds.size.width, h = bounds.size.height;
@@ -127,13 +143,12 @@
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     - (BOOL)upperChecked {
         return [_control upperChecked];
     }
-
     - (NSColor*)backgroundColor {
         return _bgColor;
     }
 @end
-        
-

@@ -31,6 +31,7 @@
                         mainWindowPeer:(iHashMainWindowPeer*)mainWindowPeer {
 
         _mainWindowPeer = mainWindowPeer;
+        _mainView = nil;
         if (([super initWithContentRect:contentRect application:application])) {
 
             [self registerForDraggedTypes:
@@ -58,11 +59,10 @@
     }
     - (MainView*)createViewWithContentRect:(NSRect)contentRect {
         Application* application = [self application];
-        iHashMainView* view = nil;
 
         LOG_DEBUG("[[iHashMainView alloc] initWithFrame:contentRect mainWindow:self application:application mainWindowPeer:_mainWindowPeer]...");
-        if ((view = [[iHashMainView alloc] initWithFrame:contentRect mainWindow:self application:application mainWindowPeer:_mainWindowPeer])) {
-            return view;
+        if ((_mainView = [[iHashMainView alloc] initWithFrame:contentRect mainWindow:self application:application mainWindowPeer:_mainWindowPeer])) {
+            return _mainView;
         } else {
             LOG_ERROR("...failed on [[iHashMainView alloc] initWithFrame:contentRect mainWindow:self application:application mainWindowPeer:_mainWindowPeer]");
         }
@@ -101,10 +101,35 @@
         }
     }
     - (void)updateFileHash:(id)sender {
-        XOS_LOG_DEBUG("updateFileHash...");
+        LOG_DEBUG("updateFileHash...");
         if ((_mainWindowPeer)) {
             _mainWindowPeer->HashFileUpdate();
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    - (void)windowDidBecomeMain:(NSNotification*)notification {
+        LOG_DEBUG("[_mainView windowDidBecomeMain:notification]...");
+        [_mainView windowDidBecomeMain:notification];
+    }
+    - (void)windowDidResignMain:(NSNotification*)notification {
+        LOG_DEBUG("[_mainView windowDidResignMain:notification]...");
+        [_mainView windowDidResignMain:notification];
+    }
+    - (void)windowDidBecomeKey:(NSNotification*)notification {
+        LOG_DEBUG("[_mainView windowDidBecomeKey:notification]...");
+        [_mainView windowDidBecomeKey:notification];
+    }
+    - (void)windowDidResignKey:(NSNotification*)notification {
+        LOG_DEBUG("[_mainView windowDidResignKey:notification]...");
+        [_mainView windowDidResignKey:notification];
+    }
+    - (BOOL)canBecomeMainWindow {
+        return YES;
+    }
+    - (BOOL)canBecomeKeyWindow {
+        return YES;
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -113,18 +138,6 @@
         return NSBorderlessWindowMask
                | NSClosableWindowMask
                | NSMiniaturizableWindowMask;
-    }
-    - (BOOL)canBecomeMainWindow {
-        return YES;
-    }
-    - (BOOL)canBecomeKeyWindow {
-        return YES;
-    }
-    - (void)windowDidBecomeKey:(NSNotification*)notification {
-        [[self view] windowDidBecomeKey:notification];
-    }
-    - (void)windowDidResignKey:(NSNotification*)notification {
-        [[self view] windowDidResignKey:notification];
     }
 
     - (void)setContentView:(NSView*)contentView {
@@ -141,12 +154,28 @@
 
         if ([[pboard types] containsObject:NSFilenamesPboardType]) {
             if (sourceDragMask & NSDragOperationLink) {
+                LOG_DEBUG("NSDragOperationLink [self orderFront:sender]...");
+                [self orderFront:sender];
                 return NSDragOperationCopy;
             } else if (sourceDragMask & NSDragOperationCopy) {
+                LOG_DEBUG("NSDragOperationCopy [self orderFront:sender]...");
+                [self orderFront:sender];
                 return NSDragOperationCopy;
             }
         }
         return NSDragOperationNone;
+    }
+    - (void)draggingExited:(id<NSDraggingInfo>)sender {
+    }
+    - (BOOL)wantsPeriodicDraggingUpdates {
+        return NO;
+    }
+    - (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender {
+        return YES;
+    }
+    - (void)concludeDragOperation:(id<NSDraggingInfo>)sender {
+        LOG_DEBUG("[[self application] activateIgnoringOtherApps:YES]...");
+        [[self application] activateIgnoringOtherApps:YES];
     }
     - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
         NSPasteboard *pboard = [sender draggingPasteboard];
@@ -164,27 +193,25 @@
                     const char* chars = 0;
 
                     if ((chars = [fileName UTF8String])) {
-                        iHashMainView* view = nil;
 
                         LOG_DEBUG("...dropped file \"" << chars << "\"");
-                        if ((view = [self view])) {
+                        if ((_mainView)) {
                             iHashControlView* control = nil;
 
-                            if ((control = [view control])) {
+                            if ((control = [_mainView control])) {
                                 String fileString(chars);
 
                                 [control setFile:fileString];
                                 if ((_mainWindowPeer)) {
                                     _mainWindowPeer->Hash();
                                 }
-                                return YES;
                             }
                         }
                     }
                 }
             }
         }
-        return NO;
+        return YES;
     }
 @end
         

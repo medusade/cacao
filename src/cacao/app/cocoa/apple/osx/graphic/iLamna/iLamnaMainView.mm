@@ -22,11 +22,14 @@
 #include "cacao/cocoa/lamna/graphic/surface/apple/osx/color.hh"
 #include "cacao/cocoa/apple/osx/Logger.hh"
 #include "lamna/graphic/surface/filled_circle.hpp"
+#include "lamna/graphic/surface/elliptical_rounded_rectangle.hpp"
 
 typedef cacao::cocoa::lamna::graphic::surface::apple::osx::pixel iLamnaPixel;
 typedef cacao::cocoa::lamna::graphic::surface::apple::osx::context iLamnaContext;
 typedef cacao::cocoa::lamna::graphic::surface::apple::osx::image iLamnaImage;
 typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
+typedef lamna::graphic::surface::elliptical_rounded_rectangle iERRectangle;
+typedef lamna::graphic::surface::filled_elliptical_rounded_rectangle iFERRectangle;
 
 ///////////////////////////////////////////////////////////////////////
 /// Implentation: iLamnaMainView
@@ -52,21 +55,28 @@ typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
     - (void)drawRect:(NSRect)rect {
         NSRect bounds = [self bounds];
         int w = bounds.size.width, h = bounds.size.height;
-        int x = (w/2), y = (h/2);
-        int colorR = 2, cornerR = 26;
+        int colorR = 2, cornerR = 26, iconR = cornerR/2;
+
         [[NSColor clearColor] set];
         NSRectFill(bounds);
-        if (((colorR) < (x)) && ((colorR) < (y))) {
+
+        if (((cornerR*4) < (w)) && ((cornerR*3) < (h))) {
             iLamnaContext context(self);
             iLamnaImage image(context);
             iLamnaColor fgColor(image, _fgRed, _fgGreen, _fgBlue, colorR, colorR);
             iLamnaColor bgColor(image, _bgRed, _bgGreen, _bgBlue, colorR, colorR);
+            iFERRectangle eRR
+            (image, fgColor, cornerR*2,cornerR*2, iconR,iconR, colorR);
+
             image.SelectImage(&bgColor);
             image.FillRoundedRectangle
-            (cornerR,cornerR, w-cornerR-cornerR-colorR+1,h-cornerR-cornerR-colorR+1, cornerR);
+            (cornerR,cornerR*2, w-cornerR*2-colorR+1,h-cornerR*3-colorR+1, cornerR);
+
             image.SelectImage(&fgColor);
             image.DrawRoundedRectangle
-            (cornerR,cornerR, w-cornerR-cornerR-colorR+1,h-cornerR-cornerR-colorR+1, cornerR);
+            (cornerR,cornerR*2, w-cornerR*2-colorR+1,h-cornerR*3-colorR+1, cornerR);
+
+            eRR.Plot(cornerR+iconR, iconR);
         }
     }
 @end

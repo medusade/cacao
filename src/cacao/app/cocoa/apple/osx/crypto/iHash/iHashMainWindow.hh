@@ -30,6 +30,7 @@
 @interface iHashMainWindow: MainWindow {
     }
     @property (assign) iHashMainWindowPeer* mainWindowPeer;
+    @property (assign) iHashMainView* mainView;
 
     - (iHashMainWindow*)initWithContentRect:(NSRect)contentRect
                         application:(Application*)application
