@@ -28,10 +28,25 @@ $${lamna_DEFINES} \
 
 ########################################################################
 iLamna_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.hpp \
+$${LAMNA_SRC}/lamna/graphic/surface/filled_circle.hpp \
+$${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle_image.hpp \
 $${LAMNA_SRC}/lamna/graphic/image.hpp \
+$${LAMNA_SRC}/lamna/graphic/base_image.hpp \
+$${LAMNA_SRC}/lamna/graphic/surface/elliptical_rounded_rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/rounded_rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/rectangle.hpp \
 
 iLamna_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.cpp \
+$${LAMNA_SRC}/lamna/graphic/surface/filled_circle.cpp \
+$${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle_image.cpp \
 $${LAMNA_SRC}/lamna/graphic/image.cpp \
+$${LAMNA_SRC}/lamna/graphic/base_image.cpp \
+$${LAMNA_SRC}/lamna/graphic/surface/elliptical_rounded_rectangle.cpp \
+$${LAMNA_SRC}/lamna/graphic/rounded_rectangle.cpp \
+$${LAMNA_SRC}/lamna/graphic/rectangle.cpp \
 
 ########################################################################
 iLamna_OBJECTIVE_HEADERS += \
@@ -139,4 +154,3 @@ _iLamna_OBJECTIVE_SOURCES += \
 iLamna_LIBS += \
 $${cocoa_LIBS} \
 $${cacao_LIBS} \
-
