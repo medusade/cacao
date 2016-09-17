@@ -31,22 +31,33 @@ iLamna_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.hpp \
 $${LAMNA_SRC}/lamna/graphic/surface/filled_circle.hpp \
 $${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle_image.hpp \
+$${LAMNA_SRC}/lamna/graphic/rounded_rectangle_image.hpp \
+$${LAMNA_SRC}/lamna/graphic/rectangle_image.hpp \
+$${LAMNA_SRC}/lamna/graphic/triangle_image.hpp \
 $${LAMNA_SRC}/lamna/graphic/image.hpp \
 $${LAMNA_SRC}/lamna/graphic/base_image.hpp \
 $${LAMNA_SRC}/lamna/graphic/surface/elliptical_rounded_rectangle.hpp \
 $${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/surface/rounded_rectangle.hpp \
 $${LAMNA_SRC}/lamna/graphic/rounded_rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/surface/rectangle.hpp \
 $${LAMNA_SRC}/lamna/graphic/rectangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/surface/triangle.hpp \
+$${LAMNA_SRC}/lamna/graphic/triangle.hpp \
 
 iLamna_SOURCES += \
 $${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.cpp \
 $${LAMNA_SRC}/lamna/graphic/surface/filled_circle.cpp \
 $${LAMNA_SRC}/lamna/graphic/elliptical_rounded_rectangle_image.cpp \
+$${LAMNA_SRC}/lamna/graphic/rounded_rectangle_image.cpp \
+$${LAMNA_SRC}/lamna/graphic/rectangle_image.cpp \
+$${LAMNA_SRC}/lamna/graphic/triangle_image.cpp \
 $${LAMNA_SRC}/lamna/graphic/image.cpp \
 $${LAMNA_SRC}/lamna/graphic/base_image.cpp \
 $${LAMNA_SRC}/lamna/graphic/surface/elliptical_rounded_rectangle.cpp \
-$${LAMNA_SRC}/lamna/graphic/rounded_rectangle.cpp \
-$${LAMNA_SRC}/lamna/graphic/rectangle.cpp \
+$${LAMNA_SRC}/lamna/graphic/surface/rounded_rectangle.cpp \
+$${LAMNA_SRC}/lamna/graphic/surface/rectangle.cpp \
+$${LAMNA_SRC}/lamna/graphic/surface/triangle.cpp \
 
 ########################################################################
 iLamna_OBJECTIVE_HEADERS += \
@@ -127,6 +138,7 @@ $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/object.hh \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/image.hh \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/context.hh \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/pixel.hh \
+$${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/Shapes.hh \
 
 iLamna_OBJECTIVE_SOURCES += \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/color.mm \
@@ -134,6 +146,7 @@ $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/object.mm \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/image.mm \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/context.mm \
 $${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/apple/osx/pixel.mm \
+$${CACAO_SRC}/cacao/cocoa/lamna/graphic/surface/Shapes.mm \
 
 ########################################################################
 iLamna_OBJECTIVE_HEADERS += \

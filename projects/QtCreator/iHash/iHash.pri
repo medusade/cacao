@@ -76,6 +76,13 @@ iHash_OBJECTIVE_SOURCES += \
 $${CACAO_SRC}/cacao/cocoa/crypto/hash/Base.mm \
 
 ########################################################################
+iHash_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.hpp \
+
+iHash_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/surface/shape/key_icon.cpp \
+
+########################################################################
 iHash_OBJECTIVE_HEADERS += \
 $${CACAO_SRC}/cacao/cocoa/apple/osx/Main.hh \
 $${CACAO_SRC}/cacao/cocoa/apple/osx/MainWindow.hh \
