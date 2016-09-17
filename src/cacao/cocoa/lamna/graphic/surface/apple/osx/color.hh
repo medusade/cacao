@@ -103,4 +103,9 @@ typedef colort<> color;
 } // namespace cocoa 
 } // namespace cacao 
 
-#endif // _CACAO_COCOA_LAMNA_GRAPHIC_SURFACE_APPLE_OSX_COLOR_HH 
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::pixel LGSPixel;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::context LGSContext;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::image LGSImage;
+typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color LGSColor;
+
+#endif // _CACAO_COCOA_LAMNA_GRAPHIC_SURFACE_APPLE_OSX_COLOR_HH

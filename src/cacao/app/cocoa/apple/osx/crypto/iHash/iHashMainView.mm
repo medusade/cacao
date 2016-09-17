@@ -40,14 +40,25 @@
         _fgR = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_R;
         _fgG = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_G;
         _fgB = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_B;
-        _fgPixel = new iLamnaPixel(_fgR, _fgG, _fgB);
+        _fgPixel = new LGSPixel(_fgR, _fgG, _fgB);
         _fgColor = (NSColor*)(*_fgPixel);
 
         _bgR = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_R;
         _bgG = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_G;
         _bgB = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_B;
-        _bgPixel = new iLamnaPixel(_bgR, _bgG, _bgB);
+        _bgPixel = new LGSPixel(_bgR, _bgG, _bgB);
         _bgColor = (NSColor*)(*_bgPixel);
+
+        _bdR = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_R;
+        _bdG = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_G;
+        _bdB = CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_B;
+        _bdPixel = new LGSPixel(_bdR, _bdG, _bdB);
+        _bdColor = (NSColor*)(*_bdPixel);
+
+        _keyIconHeight = (_cornerRadius*18)/8;
+        _keyIconWidth = (_keyIconHeight*8)/4;
+        _keyIconX = (_cornerRadius*3)/2;
+        _keyIconY = (_keyIconHeight-_cornerRadius+_colorRadius+_colorRadius);
 
         if (([super initWithFrame:rect application:application])) {
             _mainWindowPeer = mainWindowPeer;
@@ -63,7 +74,7 @@
                 [self addSubview:_control];
                 rect = [_control frame];
                 rect.size.width += (_cornerRadius*2)-2;
-                rect.size.height += (_cornerRadius*2)-2;
+                rect.size.height += (_cornerRadius*2)-2+_keyIconY;
                 [self setFrameSize:rect.size];
                 rect.origin.x = _cornerRadius-1;
                 rect.origin.y = _cornerRadius-1;
@@ -78,9 +89,10 @@
                     NSTrackingArea* minTrackingArea = nil;
                     rect = [self frame];
                     rect.origin.x = _cornerRadius;
-                    rect.origin.y = rect.size.height - ((_cornerRadius - minRect.size.height)/2 + minRect.size.height);
+                    rect.origin.y = rect.size.height - _keyIconY - ((_cornerRadius - minRect.size.height)/2 + minRect.size.height);
                     [_minButton setFrameOrigin:rect.origin];
                     [self addSubview:_minButton];
+                    _keyIconX += minRect.size.width;
                     if ((minTrackingArea = [[NSTrackingArea alloc]
                          initWithRect:minRect options:minTrackingOptions
                          owner:self userInfo:nil])) {
@@ -126,20 +138,25 @@
         [[NSColor clearColor] set];
         NSRectFill(bounds);
         if ((_cornerRadius*2 < w) && (_cornerRadius*2 < h)) {
-            iLamnaContext context(self);
-            iLamnaImage image(context);
-            iLamnaColor fgColor(image, _fgR, _fgG, _fgB, _colorRadius, _colorRadius);
-            iLamnaColor bgColor(image, _bgR, _bgG, _bgB, _colorRadius, _colorRadius);
+            LGSContext context(self);
+            LGSImage image(context);
+            LGSColor fgColor(image, _fgR, _fgG, _fgB, _colorRadius, _colorRadius);
+            LGSColor bgColor(image, _bgR, _bgG, _bgB, _colorRadius, _colorRadius);
+            LGSColor bdColor(image, _bdR, _bdG, _bdB, _colorRadius, _colorRadius);
+            LGSKeyIcon keyIcon
+            (image, fgColor,bdColor,fgColor,bdColor,
+             _keyIconWidth, _keyIconHeight, _colorRadius);
             image.SelectImage(&bgColor);
             image.FillRoundedRectangle
-            (_cornerRadius,_cornerRadius,
+            (_cornerRadius,_cornerRadius+_keyIconY,
              w-_cornerRadius*2-_colorRadius+1,
-             h-_cornerRadius*2-_colorRadius+1, _cornerRadius);
-            image.SelectImage(&fgColor);
+             h-_cornerRadius*2-_colorRadius+1-_keyIconY, _cornerRadius);
+            image.SelectImage(&bdColor);
             image.DrawRoundedRectangle
-            (_cornerRadius,_cornerRadius,
+            (_cornerRadius,_cornerRadius+_keyIconY,
              w-_cornerRadius*2-_colorRadius+1,
-             h-_cornerRadius*2-_colorRadius+1, _cornerRadius);
+             h-_cornerRadius*2-_colorRadius+1-_keyIconY, _cornerRadius);
+            keyIcon.Plot(_keyIconX,_colorRadius);
         }
     }
 

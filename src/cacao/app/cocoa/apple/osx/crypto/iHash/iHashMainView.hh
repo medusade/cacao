@@ -23,23 +23,23 @@
 
 #include "cacao/app/cocoa/apple/osx/crypto/iHash/iHashControlView.hh"
 #include "cacao/cocoa/lamna/graphic/surface/apple/osx/color.hh"
+#include "cacao/cocoa/lamna/graphic/surface/Shapes.hh"
 #include "cacao/cocoa/apple/osx/MainWindow.hh"
 
 #define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_CORNER_RADIUS 26
 #define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_COLOR_RADIUS 2
 
-#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_R 0x88
-#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_G 0x88
-#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_B 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_R 0x00
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_G 0x00
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_FG_COLOR_B 0x00
 
 #define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_R 0xFF
 #define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_G 0xFF
 #define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BG_COLOR_B 0xDD
 
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::pixel iLamnaPixel;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::context iLamnaContext;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::image iLamnaImage;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_R 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_G 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_CRYPTO_IHASH_IHASHMAINVIEW_BD_COLOR_B 0x88
 
 ///////////////////////////////////////////////////////////////////////
 /// Interface: iHashMainView
@@ -56,14 +56,25 @@ typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
     @property (assign) int fgR;
     @property (assign) int fgG;
     @property (assign) int fgB;
-    @property (assign) iLamnaPixel* fgPixel;
+    @property (assign) LGSPixel* fgPixel;
     @property (assign) NSColor* fgColor;
 
     @property (assign) int bgR;
     @property (assign) int bgG;
     @property (assign) int bgB;
-    @property (assign) iLamnaPixel* bgPixel;
+    @property (assign) LGSPixel* bgPixel;
     @property (assign) NSColor* bgColor;
+
+    @property (assign) int bdR;
+    @property (assign) int bdG;
+    @property (assign) int bdB;
+    @property (assign) LGSPixel* bdPixel;
+    @property (assign) NSColor* bdColor;
+
+    @property (assign) int keyIconWidth;
+    @property (assign) int keyIconHeight;
+    @property (assign) int keyIconX;
+    @property (assign) int keyIconY;
 
     - (iHashMainView*)initWithFrame:(NSRect)rect
                       mainWindow:(MainWindow*)mainWindow

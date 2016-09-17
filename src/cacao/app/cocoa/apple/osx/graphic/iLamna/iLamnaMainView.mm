@@ -20,16 +20,8 @@
 ///////////////////////////////////////////////////////////////////////
 #include "cacao/app/cocoa/apple/osx/graphic/iLamna/iLamnaMainView.hh"
 #include "cacao/cocoa/lamna/graphic/surface/apple/osx/color.hh"
+#include "cacao/cocoa/lamna/graphic/surface/Shapes.hh"
 #include "cacao/cocoa/apple/osx/Logger.hh"
-#include "lamna/graphic/surface/filled_circle.hpp"
-#include "lamna/graphic/surface/elliptical_rounded_rectangle.hpp"
-
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::pixel iLamnaPixel;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::context iLamnaContext;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::image iLamnaImage;
-typedef cacao::cocoa::lamna::graphic::surface::apple::osx::color iLamnaColor;
-typedef lamna::graphic::surface::elliptical_rounded_rectangle iERRectangle;
-typedef lamna::graphic::surface::filled_elliptical_rounded_rectangle iFERRectangle;
 
 ///////////////////////////////////////////////////////////////////////
 /// Implentation: iLamnaMainView
@@ -46,6 +38,10 @@ typedef lamna::graphic::surface::filled_elliptical_rounded_rectangle iFERRectang
         _bgGreen = CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BG_GREEN;
         _bgBlue = CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BG_BLUE;
 
+        _bdRed = CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_RED;
+        _bdGreen = CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_GREEN;
+        _bdBlue = CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_BLUE;
+
         if (([super initWithFrame:rect application:application])) {
             return self;
         }
@@ -61,22 +57,23 @@ typedef lamna::graphic::surface::filled_elliptical_rounded_rectangle iFERRectang
         NSRectFill(bounds);
 
         if (((cornerR*4) < (w)) && ((cornerR*3) < (h))) {
-            iLamnaContext context(self);
-            iLamnaImage image(context);
-            iLamnaColor fgColor(image, _fgRed, _fgGreen, _fgBlue, colorR, colorR);
-            iLamnaColor bgColor(image, _bgRed, _bgGreen, _bgBlue, colorR, colorR);
-            iFERRectangle eRR
-            (image, fgColor, cornerR*2,cornerR*2, iconR,iconR, colorR);
+            LGSContext context(self);
+            LGSImage image(context);
+            LGSColor fgColor(image, _fgRed, _fgGreen, _fgBlue, colorR, colorR);
+            LGSColor bgColor(image, _bgRed, _bgGreen, _bgBlue, colorR, colorR);
+            LGSColor bdColor(image, _bdRed, _bdGreen, _bdBlue, colorR, colorR);
+
+            LGSKeyIcon key(image, fgColor,bdColor,fgColor,bdColor, cornerR*6,cornerR*3, colorR);
 
             image.SelectImage(&bgColor);
             image.FillRoundedRectangle
             (cornerR,cornerR*2, w-cornerR*2-colorR+1,h-cornerR*3-colorR+1, cornerR);
 
-            image.SelectImage(&fgColor);
+            image.SelectImage(&bdColor);
             image.DrawRoundedRectangle
             (cornerR,cornerR*2, w-cornerR*2-colorR+1,h-cornerR*3-colorR+1, cornerR);
 
-            eRR.Plot(cornerR+iconR, iconR);
+            key.Plot(cornerR+iconR, iconR);
         }
     }
 @end

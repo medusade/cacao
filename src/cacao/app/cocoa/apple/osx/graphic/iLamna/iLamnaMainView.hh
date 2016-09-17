@@ -21,13 +21,17 @@
 #ifndef _CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_ILAMNAMAINVIEW_HH
 #define _CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_ILAMNAMAINVIEW_HH
 
-#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_RED   0x88
-#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_GREEN 0x88
-#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_BLUE  0x88
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_RED   0x00
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_GREEN 0x00
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_FG_BLUE  0x00
 
 #define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BG_RED   0xFF
 #define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BG_GREEN 0xFF
 #define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BG_BLUE  0xDD
+
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_RED   0x88
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_GREEN 0x88
+#define CACAO_APP_COCOA_APPLE_OSX_GRAPHIC_ILAMNA_BD_BLUE  0x88
 
 #include "cacao/cocoa/apple/osx/MainView.hh"
 
@@ -43,6 +47,10 @@
     @property (assign) int bgRed;
     @property (assign) int bgGreen;
     @property (assign) int bgBlue;
+
+    @property (assign) int bdRed;
+    @property (assign) int bdGreen;
+    @property (assign) int bdBlue;
 
     - (iLamnaMainView*)initWithFrame:(NSRect)rect
                        application:(Application*)application;
