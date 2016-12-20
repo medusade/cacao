@@ -27,8 +27,10 @@ CACAO_SRC = $${CACAO_PKG}/src
 
 CONFIG(debug, debug|release) {
 CACAO_CONFIG = Debug
+DEFINES += DEBUG_BUILD
 } else {
 CACAO_CONFIG = Release
+DEFINES += RELEASE_BUILD
 }
 
 ########################################################################
@@ -74,7 +76,6 @@ lamna_LIBS += \
 # cacao
 cacao_INCLUDEPATH += \
 $${CACAO_SRC} \
-$${talas_INCLUDEPATH} \
 $${nadir_INCLUDEPATH} \
 
 cacao_DEFINES += \
