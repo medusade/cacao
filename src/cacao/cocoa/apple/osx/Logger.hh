@@ -40,8 +40,14 @@
 #define CACAO_COCOA_APPLE_OSX_LOGGER_LEVELS \
     CACAO_COCOA_APPLE_OSX_LOGGER_LEVELS_DEBUG
 
+#if !defined(RELEASE_BUILD)
 #define LOG_TRACE(args) CACAO_LOG_MESSAGE_TRACE(__FUNCTION__ << ": " << args)
 #define LOG_DEBUG(args) CACAO_LOG_MESSAGE_DEBUG(__FUNCTION__ << ": " << args)
+#else // !defined(RELEASE_BUILD)
+#define LOG_TRACE(args)
+#define LOG_DEBUG(args)
+#endif // !defined(RELEASE_BUILD)
+
 #define LOG_ERROR(args) CACAO_LOG_MESSAGE_ERROR(__FUNCTION__ << ": " << args)
 
 namespace cacao {
