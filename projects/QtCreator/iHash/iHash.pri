@@ -143,4 +143,5 @@ $${CACAO_SRC}/cacao/app/cocoa/apple/osx/crypto/iHash/iHashMainWindowPeer.mm \
 iHash_LIBS += \
 $${cocoa_LIBS} \
 $${cacao_LIBS} \
+$${xosnadir_LIBS} \
 

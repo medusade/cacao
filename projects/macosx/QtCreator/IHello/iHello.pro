@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2016 $organization$
+# Copyright (c) 1988-2017 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,66 +13,48 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: cacao.pri
+#   File: iHello.pro
 #
 # Author: $author$
-#   Date: 6/9/2016
+#   Date: 1/11/2017
 ########################################################################
+include(../../../QtCreator/cacao.pri)
+include(../cacao.pri)
+include(../../../QtCreator/iCacao.pri)
+include(../iCacao.pri)
+include(../../../QtCreator/iHello/iHello.pri)
 
-CACAO_OS = macosx
+TARGET = iHello
+
+INCLUDEPATH += \
+$${iHello_INCLUDEPATH} \
+
+DEFINES += \
+$${iHello_DEFINES} \
 
 ########################################################################
-# NO Qt
-QT -= gui core
+OBJECTIVE_HEADERS += \
+$${iHello_OBJECTIVE_HEADERS} \
+
+OBJECTIVE_SOURCES += \
+$${iHello_OBJECTIVE_SOURCES} \
 
 ########################################################################
-# cocoa
-cocoa_LIBS += \
+HEADERS += \
+$${OBJECTIVE_HEADERS} \
+$${iHello_HEADERS} \
+
+SOURCES += \
+$${iHello_SOURCES} \
+
+########################################################################
+LIBS += \
+$${iHello_LIBS} \
 -framework AppKit \
 -framework CoreFoundation \
 -framework Foundation \
 
 ########################################################################
-# nadir
-NADIR_BLD = ../../$${NADIR_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
-
-nadir_INCLUDEPATH += \
-
-nadir_DEFINES += \
-
-xosnadir_LIBS += \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
-
-nadir_LIBS += \
--L$${NADIR_LIB}/libnadir \
--lnadir \
-
-########################################################################
-# lamna
-LAMNA_BLD = ../../$${LAMNA_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
-
-lamna_INCLUDEPATH += \
-
-lamna_DEFINES += \
-
-lamna_LIBS += \
--L$${LAMNA_LIB}/liblamna \
--llamna \
-
-########################################################################
-# cacao
-cacao_INCLUDEPATH += \
-
-cacao_DEFINES += \
-
-cacao_HEADERS += \
-
-cacao_SOURCES += \
-
-cacao_LIBS += \
--lpthread \
--ldl \
+# NO Qt
+QT -= gui core
 

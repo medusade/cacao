@@ -167,3 +167,4 @@ _iLamna_OBJECTIVE_SOURCES += \
 iLamna_LIBS += \
 $${cocoa_LIBS} \
 $${cacao_LIBS} \
+$${xosnadir_LIBS} \

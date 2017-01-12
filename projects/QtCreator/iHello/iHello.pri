@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2016 $organization$
+# Copyright (c) 1988-2017 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,66 +13,39 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: cacao.pri
+#   File: iHello.pri
 #
 # Author: $author$
-#   Date: 6/9/2016
+#   Date: 1/11/2017
 ########################################################################
 
-CACAO_OS = macosx
+iHello_INCLUDEPATH += \
+$${cacao_INCLUDEPATH} \
+
+iHello_DEFINES += \
+$${cacao_DEFINES} \
+USE_NADIR_BASE \
 
 ########################################################################
-# NO Qt
-QT -= gui core
+iHello_OBJECTIVE_HEADERS += \
+$${iCacao_OBJECTIVE_HEADERS} \
+
+iHello_OBJECTIVE_SOURCES += \
+$${iCacao_OBJECTIVE_SOURCES} \
 
 ########################################################################
-# cocoa
-cocoa_LIBS += \
--framework AppKit \
--framework CoreFoundation \
--framework Foundation \
+iHello_OBJECTIVE_HEADERS += \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMain.hh \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMainWindow.hh \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMainView.hh \
+
+iHello_OBJECTIVE_SOURCES += \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMain.mm \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMainWindow.mm \
+$${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMainView.mm \
 
 ########################################################################
-# nadir
-NADIR_BLD = ../../$${NADIR_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
 
-nadir_INCLUDEPATH += \
-
-nadir_DEFINES += \
-
-xosnadir_LIBS += \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
-
-nadir_LIBS += \
--L$${NADIR_LIB}/libnadir \
--lnadir \
-
-########################################################################
-# lamna
-LAMNA_BLD = ../../$${LAMNA_PKG}/build/$${CACAO_OS}/QtCreator/$${CACAO_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
-
-lamna_INCLUDEPATH += \
-
-lamna_DEFINES += \
-
-lamna_LIBS += \
--L$${LAMNA_LIB}/liblamna \
--llamna \
-
-########################################################################
-# cacao
-cacao_INCLUDEPATH += \
-
-cacao_DEFINES += \
-
-cacao_HEADERS += \
-
-cacao_SOURCES += \
-
-cacao_LIBS += \
--lpthread \
--ldl \
+iHello_LIBS += \
+$${cacao_LIBS} \
 

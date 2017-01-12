@@ -49,4 +49,6 @@ $${CACAO_SRC}/cacao/icocoa/apple/osx/main_main.mm \
 
 ichello_LIBS += \
 $${cacao_LIBS} \
+$${cocoa_LIBS} \
+$${xosnadir_LIBS} \
 

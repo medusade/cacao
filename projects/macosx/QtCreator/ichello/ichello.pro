@@ -48,11 +48,3 @@ $${ichello_SOURCES} \
 ########################################################################
 LIBS += \
 $${ichello_LIBS} \
--framework AppKit \
--framework CoreFoundation \
--framework Foundation \
-
-########################################################################
-# NO Qt
-QT -= gui core
-
