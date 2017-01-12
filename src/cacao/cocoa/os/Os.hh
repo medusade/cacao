@@ -21,7 +21,11 @@
 #ifndef _CACAO_COCOA_OS_OS_HH
 #define _CACAO_COCOA_OS_OS_HH
 
+#if !defined(USE_NADIR_BASE)
 #include "xos/base/platform_build.hpp"
+#else // !defined(USE_NADIR_BASE)
+#include "nadir/platform/platform_build.h"
+#endif // !defined(USE_NADIR_BASE)
 
 namespace cacao {
 namespace cocoa {

@@ -19,7 +19,11 @@
 ///   Date: 7/11/2016
 ///////////////////////////////////////////////////////////////////////
 #include "cacao/icocoa/apple/osx/main_main.hh"
+
+#if !defined(USE_NADIR_BASE)
 #include "xos/base/main.cpp"
+#else // !defined(USE_NADIR_BASE)
+#endif // !defined(USE_NADIR_BASE)
 
 ///////////////////////////////////////////////////////////////////////
 /// Function: main

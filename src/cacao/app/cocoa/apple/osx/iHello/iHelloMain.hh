@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2016 $organization$
+/// Copyright (c) 1988-2017 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,20 +13,39 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main_main.mm
+///   File: iHelloMain.hh
 ///
 /// Author: $author$
-///   Date: 7/10/2016
+///   Date: 1/11/2017
 ///////////////////////////////////////////////////////////////////////
-#include "cacao/console/main_main.hh"
+#ifndef _CACAO_APP_COCOA_APPLE_OSX_IHELLO_IHELLOMAIN_HH
+#define _CACAO_APP_COCOA_APPLE_OSX_IHELLO_IHELLOMAIN_HH
 
-#if !defined(USE_NADIR_BASE)
-#include "xos/base/main_main.cpp"
-#else // !defined(USE_NADIR_BASE)
-#endif // !defined(USE_NADIR_BASE)
+#include "cacao/app/cocoa/apple/osx/iHello/iHelloMainWindow.hh"
+#include "cacao/cocoa/apple/osx/Main.hh"
+
+///////////////////////////////////////////////////////////////////////
+/// Interface: iHelloMain
+///////////////////////////////////////////////////////////////////////
+@interface iHelloMain: Main {
+    }
+    @property (assign) iHelloMainWindow* mainWindow;
+
+    - (iHelloMain*)initWithApplication:(Application*)application;
+@end
 
 namespace cacao {
-namespace gui {
+namespace app {
+namespace cocoa {
+namespace apple {
+namespace osx {
+namespace iHello {
 
-} // namespace gui 
+} // namespace iHello 
+} // namespace osx 
+} // namespace apple 
+} // namespace cocoa 
+} // namespace app 
 } // namespace cacao 
+
+#endif // _CACAO_APP_COCOA_APPLE_OSX_IHELLO_IHELLOMAIN_HH 

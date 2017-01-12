@@ -23,10 +23,13 @@
 
 #include "cacao/cocoa/apple/osx/Cocoa.hh"
 #include "cacao/io/logger.hh"
+
+#if !defined(USE_NADIR_BASE)
 #include "xos/io/logger.hpp"
 #include "xos/mt/locker.hpp"
 #include "xos/mt/lock.hpp"
 #include "xos/mt/os/mutex.hpp"
+#include <iostream>
 
 #define CACAO_COCOA_APPLE_OSX_LOGGER_LEVELS_TRACE \
     (XOS_LOGGING_LEVELS_TRACE_MESSAGE | XOS_LOGGING_LEVELS_ERROR)
@@ -49,12 +52,38 @@
 #endif // !defined(RELEASE_BUILD)
 
 #define LOG_ERROR(args) CACAO_LOG_MESSAGE_ERROR(__FUNCTION__ << ": " << args)
+#define LOGGER_INIT XOS_LOGGER_INIT
+#define LOGGER_FINI XOS_LOGGER_FINI
+
+#if !defined(STDERR_LOG)
+#define STDERR_LOG(__message__) \
+    std::cerr << __FILE__ << "[" << __LINE__ << "] " << __FUNCTION__ << " " << __message__ << "\n"
+#endif // !defined(STDERR_LOG)
+
+#if !defined(STDERR_LOG_DEBUG)
+#if defined(DEBUG_BUILD)
+#define STDERR_LOG_DEBUG(__message__) STDERR_LOG(__message__)
+#else // defined(DEBUG_BUILD)
+#define STDERR_LOG_DEBUG(__message__)
+#endif // defined(DEBUG_BUILD)
+#endif // !defined(STDERR_LOG_DEBUG)
+
+#if !defined(STDERR_LOG_ERROR)
+#define STDERR_LOG_ERROR(__message__) STDERR_LOG(__message__)
+#endif // !defined(STDERR_LOG_ERROR)
+#else // !defined(USE_NADIR_BASE)
+#include "nadir/console/main_logger.hpp"
+#include "nadir/console/main.hpp"
+#include "nadir/mt/os/mutex.hpp"
+#include "nadir/io/logger.hpp"
+#endif // !defined(USE_NADIR_BASE)
 
 namespace cacao {
 namespace cocoa {
 namespace apple {
 namespace osx {
 
+#if !defined(USE_NADIR_BASE)
 typedef xos::mt::locker main_implements;
 typedef xos::mt::os::mutex main_extends;
 ///////////////////////////////////////////////////////////////////////
@@ -291,6 +320,26 @@ protected:
     Implements* logger_;
     level enabled_for_;
 };
+#else // !defined(USE_NADIR_BASE)
+typedef nadir::base logger_extends;
+///////////////////////////////////////////////////////////////////////
+///  Class: logger
+///////////////////////////////////////////////////////////////////////
+class _EXPORT_CLASS logger: public logger_extends {
+public:
+    typedef logger_extends Extends;
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    logger(): mutex_(false), main_logger_(mutex_, main_) {}
+    virtual ~logger() {}
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+protected:
+    nadir::mt::os::mutex mutex_;
+    nadir::console::main main_;
+    nadir::console::main_logger main_logger_;
+};
+#endif // !defined(USE_NADIR_BASE)
 
 } // namespace osx
 } // namespace apple 

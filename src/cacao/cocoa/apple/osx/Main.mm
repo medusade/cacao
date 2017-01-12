@@ -105,46 +105,50 @@
 ///////////////////////////////////////////////////////////////////////
 int main(int argc, char **argv, char **env) {
     int err = 1;
-    NSAutoreleasePool *autoreleasePool = nil;
-    Application* sharedApplication = nil;
-    id<Main> main = nil;
-    cacao::cocoa::apple::osx::logger logger;
+    try {
+        NSAutoreleasePool *autoreleasePool = nil;
+        Application* sharedApplication = nil;
+        id<Main> main = nil;
+        cacao::cocoa::apple::osx::logger logger;
 
-    // initialize logger
-    //
-    XOS_LOGGER_INIT();
+        // initialize logger
+        //
+        LOGGER_INIT();
 
-    LOG_DEBUG("[[AutoreleasePool alloc] init]...");
-    if ((autoreleasePool = [[NSAutoreleasePool alloc] init])) {
+        LOG_DEBUG("[[AutoreleasePool alloc] init]...");
+        if ((autoreleasePool = [[NSAutoreleasePool alloc] init])) {
 
-        LOG_DEBUG("[Application sharedApplication]...");
-        if ((sharedApplication = [Application sharedApplication])) {
+            LOG_DEBUG("[Application sharedApplication]...");
+            if ((sharedApplication = [Application sharedApplication])) {
 
-            LOG_DEBUG("[ApplicationMain createWithApplication:sharedApplication]...");
-            if ((main = [ApplicationMain createWithApplication:sharedApplication])) {
+                LOG_DEBUG("[ApplicationMain createWithApplication:sharedApplication]...");
+                if ((main = [ApplicationMain createWithApplication:sharedApplication])) {
 
-                LOG_DEBUG("[main run:argc argv:argv env:env]...");
-                err = [main run:argc argv:argv env:env];
-                LOG_DEBUG("..." << err << " = [main run:argc argv:argv env:env]");
+                    LOG_DEBUG("[main run:argc argv:argv env:env]...");
+                    err = [main run:argc argv:argv env:env];
+                    LOG_DEBUG("..." << err << " = [main run:argc argv:argv env:env]");
 
-                LOG_DEBUG("[main destroy]...");
-                [main destroy];
+                    LOG_DEBUG("[main destroy]...");
+                    [main destroy];
+                } else {
+                    LOG_ERROR("...failed on [ApplicationMain createWithApplication:sharedApplication]");
+                }
             } else {
-                LOG_ERROR("...failed on [ApplicationMain createWithApplication:sharedApplication]");
+                LOG_ERROR("...failed on [Application sharedApplication]");
             }
+
+            LOG_DEBUG("[autoreleasePool release]...");
+            [autoreleasePool release];
         } else {
-            LOG_ERROR("...failed on [Application sharedApplication]");
+            LOG_ERROR("...failed on [[NSAutoreleasePool alloc] init]");
         }
 
-        LOG_DEBUG("[autoreleasePool release]...");
-        [autoreleasePool release];
-    } else {
-        LOG_ERROR("...failed on [[NSAutoreleasePool alloc] init]");
+        // finalize logger
+        //
+        LOGGER_FINI();
+    } catch (const cacao::create_exception& e) {
+        STDERR_LOG_ERROR("...caught cacao::create_exception e = " << e << "");
     }
-
-    // finalize logger
-    //
-    XOS_LOGGER_FINI();
     return err;
 }
 

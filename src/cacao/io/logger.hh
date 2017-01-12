@@ -22,6 +22,8 @@
 #define _CACAO_IO_LOGGER_HH
 
 #include "cacao/base/base.hh"
+
+#if !defined(USE_NADIR_BASE)
 #include "xos/io/logger.hpp"
 
 #define CACAO_LOG_ANY XOS_LOG_ANY
@@ -71,6 +73,9 @@
 #define CACAO_LOG_MESSAGE_INFOMFV XOS_LOG_MESSAGE_INFOMFV
 #define CACAO_LOG_MESSAGE_DEBUGMFV XOS_LOG_MESSAGE_DEBUGMFV
 #define CACAO_LOG_MESSAGE_TRACEMFV XOS_LOG_MESSAGE_TRACEMFV
+#else // !defined(USE_NADIR_BASE)
+#include "nadir/io/logger.hpp"
+#endif // !defined(USE_NADIR_BASE)
 
 namespace cacao {
 namespace io {

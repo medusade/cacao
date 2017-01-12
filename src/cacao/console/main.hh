@@ -24,8 +24,12 @@
 #include "cacao/console/main_opt.hh"
 #include "cacao/io/logger.hh"
 #include "cacao/base/base.hh"
+
+#if !defined(USE_NADIR_BASE)
 #include "xos/base/getopt/main.hpp"
 #include "xos/base/main.hpp"
+#else // !defined(USE_NADIR_BASE)
+#endif // !defined(USE_NADIR_BASE)
 
 namespace cacao {
 namespace console {

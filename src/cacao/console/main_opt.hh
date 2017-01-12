@@ -22,6 +22,8 @@
 #define _CACAO_CONSOLE_MAIN_OPT_HH
 
 #include "cacao/base/base.hh"
+
+#if !defined(USE_NADIR_BASE)
 #include "xos/base/getopt/main.hpp"
 #include "xos/base/getopt/main_opt.hpp"
 
@@ -41,6 +43,8 @@ enum {
     CACAO_MAIN_OPT_ARGUMENT_REQUIRED = XOS_MAIN_OPT_ARGUMENT_REQUIRED,
     CACAO_MAIN_OPT_ARGUMENT_OPTIONAL = XOS_MAIN_OPT_ARGUMENT_OPTIONAL
 };
+#else // !defined(USE_NADIR_BASE)
+#endif // !defined(USE_NADIR_BASE)
 
 namespace cacao {
 namespace console {
