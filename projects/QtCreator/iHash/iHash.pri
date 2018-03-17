@@ -27,6 +27,8 @@ iHash_DEFINES += \
 $${cacao_DEFINES} \
 $${lamna_DEFINES} \
 $${talas_DEFINES} \
+NO_USE_NADIR_BASE \
+NO_USE_XOS_LOGGER_INTERFACE \
 
 ########################################################################
 iHash_OBJECTIVE_HEADERS += \

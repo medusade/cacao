@@ -24,7 +24,8 @@ $${cacao_INCLUDEPATH} \
 
 iHello_DEFINES += \
 $${cacao_DEFINES} \
-USE_NADIR_BASE \
+NO_USE_NADIR_BASE \
+NO_USE_XOS_LOGGER_INTERFACE \
 
 ########################################################################
 iHello_OBJECTIVE_HEADERS += \
@@ -48,4 +49,5 @@ $${CACAO_SRC}/cacao/app/cocoa/apple/osx/iHello/iHelloMainView.mm \
 
 iHello_LIBS += \
 $${cacao_LIBS} \
+$${xosnadir_LIBS} \
 

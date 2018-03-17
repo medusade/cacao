@@ -25,6 +25,8 @@ $${lamna_INCLUDEPATH} \
 iLamna_DEFINES += \
 $${cacao_DEFINES} \
 $${lamna_DEFINES} \
+NO_USE_NADIR_BASE \
+NO_USE_XOS_LOGGER_INTERFACE \
 
 ########################################################################
 iLamna_HEADERS += \
